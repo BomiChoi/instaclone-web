@@ -8,7 +8,6 @@ import Input from "../components/auth/Input";
 import FormBox from "../components/auth/FormBox";
 import BottomBox from "../components/auth/BottomBox";
 import routes from "../routes";
-// import { useState } from "react";
 import { useForm } from "react-hook-form";
 import PageTitle from "../components/PageTitle";
 import FormError from "../components/auth/FormError";
@@ -17,13 +16,12 @@ import { logUserIn } from "../apollo";
 import { useLocation } from 'react-router-dom';
 
 const FacebookLogin = styled.div`
-  color: #385285;
+  color: ${props => props.theme.facebook};
   span {
     margin-left: 10px;
     font-weight: 600;
   }
 `;
-
 const Notification = styled.div`
   color: #2ecc71;
 `;
@@ -38,25 +36,8 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-// const Login = () => <h1>Login</h1>;
 function Login() {
-  // const [username, setUsername] = useState("");
-  // const [usernameError, setUsernameError] = useState("");
-  // const onUsernameChange = (event) => {
-  //   setUsernameError("");
-  //   setUsername(event.target.value);
-  // };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   if (username === "") {
-  //     setUsernameError("Not empty")
-  //   }
-  //   if (username.length < 10) {
-  //     setUsernameError("Too short")
-  //   }
-  // };
   const location = useLocation();
-  // console.log(location?.state?.username, location?.state?.password);
   const {
     register,
     handleSubmit,
@@ -73,7 +54,6 @@ function Login() {
     }
   });
   const onCompleted = (data) => {
-    // console.log(data);
     const { login: { ok, error, token } } = data;
     if (!ok) {
       setError("result", {
@@ -95,10 +75,6 @@ function Login() {
   const clearLoginError = () => {
     clearErrors("result")
   }
-  // const onSubmitInvalid = (data) => {
-  //   console.log(data, "invalid");
-  // };
-  // console.log(formState.isValid);
   return (
     <AuthLayout>
       <PageTitle title="Login" />
@@ -106,6 +82,7 @@ function Login() {
         <div>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
+        <Notification>{location?.state?.message}</Notification>
         <form onSubmit={handleSubmit(onSubmitValid)}>
           <Input
             ref={register({
@@ -114,9 +91,6 @@ function Login() {
                 value: 5,
                 message: "Username should be longer than 5 chars.",
               },
-              // validate: async (currentValue) => currentValue.includes(
-              //   "bomi",
-              // )
             })}
             onChange={clearLoginError}
             name="username"

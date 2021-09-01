@@ -6,6 +6,7 @@ export const lightTheme = {
   bgColor: "#FAFAFA",
   fontColor: "rgb(38, 38, 38)",
   borderColor: "rgb(219, 219, 219)",
+  facebook: "#385285",
 };
 
 export const darkTheme = {
@@ -13,6 +14,7 @@ export const darkTheme = {
   fontColor: "white",
   bgColor: "#2c2c2c",
   borderColor: "rgb(219, 219, 219)",
+  facebook: "#0095f6",
 };
 
 export const GlobalStyles = createGlobalStyle`

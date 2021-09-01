@@ -51,7 +51,7 @@ function SignUp() {
     const history = useHistory();
     const onCompleted = (data) => {
         const { username, password } = getValues();
-        const { createAccount: { ok, error } } = data;
+        const { createAccount: { ok } } = data;
         if (!ok) { return; }
         history.push(routes.home, {
             message: "Account created. Please log in.",
